@@ -1,4 +1,4 @@
-(3) yung logger began on Wed Jun 11 11:03:38 2025
+(3) yung logger began on Wed Jun 11 11:15:00 2025
 
 [TRACE]: Attached vertex shader
 [TRACE]: Attached fragment shader
@@ -1255,133 +1255,109 @@
 [TRACE]: Jump to NNN.
 [TRACE]: Skipping if not pressed
 [TRACE]: Skipping if not pressed
-[TRACE]: Call NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
+[TRACE]: Jump to NNN.
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping if not pressed
+[TRACE]: Skipping next instruciton if key pressed
+[TRACE]: Jump to NNN.
+[TRACE]: Fetching delay timer
+[TRACE]: Skipping if VX == NN
 [TRACE]: Drawing pixel.
 [TRACE]: Adds NN to VX.
-[TRACE]: Call NNN.
+[TRACE]: Jump to NNN.
+[TRACE]: Set delay timer to VX.
 [TRACE]: Drawing pixel.
-[TRACE]: Set VX to NN
-[TRACE]: Adds NN to VX.
 [TRACE]: Skipping if VX == NN
 [TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
-[TRACE]: Skipping if VX == NN
-[TRACE]: Jump to NNN.
-[TRACE]: Adds NN to VX.
+[TRACE]: Skipping if not pressed
+[INFO]: Cleaning up Doxie...
+ to VX.
 [TRACE]: Skipping if VX == NN
 [TRACE]: Jump to NNN.
 [TRACE]: Adds NN to VX.
