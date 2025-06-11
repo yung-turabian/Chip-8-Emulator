@@ -2,8 +2,12 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdlib.h>
+
 #include "framework.h"
 #include "c8/c8.h"
+
+#define YUNGLOG_IMPLEMENTATION
+#include "log.h"
 
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
@@ -17,8 +21,9 @@
 #include "../vendor/nuklear.h"
 #include "../vendor/nuklear_sdl_gl3.h"
 
-#define WINDOW_WIDTH (SCREEN_WIDTH * SCREEN_SCALE)
-#define WINDOW_HEIGHT (SCREEN_HEIGHT * SCREEN_SCALE)
+// TODO cannot be static, SC8 allows high res mode, scale must / 4
+#define WINDOW_WIDTH (SCREEN_WIDTH * C8_screen_scale)
+#define WINDOW_HEIGHT (SCREEN_HEIGHT * C8_screen_scale)
 
 #define MAX_VERTEX_MEMORY 512 * 1024
 #define MAX_ELEMENT_MEMORY 128 * 1024
@@ -155,10 +160,11 @@ void Update() {
 
 }
 
-u16 c8_pixel_size = 1 * SCREEN_SCALE;
 
 void C8RenderDisplay( void ) {
-		for ( u16 i = 0; i < SCREEN_SIZE; i++ ) {
+		u16 c8_pixel_size = 1 * C8_screen_scale;
+		
+		for ( u16 i = 0; i < C8_screen_size; i++ ) {
 				if ( C8_gfx[i] == 1 ) {
 						u16 x = (i % SCREEN_WIDTH) * c8_pixel_size;
 						u16 y = (i / SCREEN_WIDTH) * c8_pixel_size;
@@ -296,7 +302,53 @@ int main( int argc, char **argv ) {
 										case SDLK_ESCAPE:
 												quit = true;
 												break;
-										case SDLK_UP:
+										case SDLK_1:
+												C8_key[0x1] = 1;
+												break;
+										case SDLK_2:
+												C8_key[0x2] = 1;
+												break;
+										case SDLK_3:
+												C8_key[0x3] = 1;
+												break;
+										case SDLK_4:
+												C8_key[0xC] = 1;
+												break;
+										case SDLK_q:
+												C8_key[0x4] = 1;
+												break;
+										case SDLK_w:
+												C8_key[0x5] = 1;
+												break;
+										case SDLK_e:
+												C8_key[0x6] = 1;
+												break;
+										case SDLK_r:
+												C8_key[0xD] = 1;
+												break;
+										case SDLK_a:
+												C8_key[0x7] = 1;
+												break;
+										case SDLK_s:
+												C8_key[0x8] = 1;
+												break;
+										case SDLK_d:
+												C8_key[0x9] = 1;
+												break;
+										case SDLK_f:
+												C8_key[0xE] = 1;
+												break;
+										case SDLK_z:
+												C8_key[0xA] = 1;
+												break;
+										case SDLK_x:
+												C8_key[0x0] = 1;
+												break;
+										case SDLK_c:
+												C8_key[0xB] = 1;
+												break;
+										case SDLK_v:
+												C8_key[0xF] = 1;
 												break;
 										default:
 												break;
@@ -371,7 +423,7 @@ int main( int argc, char **argv ) {
 		SDL_StopTextInput();
 
 cleanup:
-		Log( LTRACE, "Cleaning up Doxie..." );
+		Log( LINFO, "Cleaning up Doxie..." );
 		SDL_GL_DeleteContext( gl_ctx );
 		Doxie_RenderFree( &renderer );
 		nk_sdl_shutdown();

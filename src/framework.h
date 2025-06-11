@@ -13,7 +13,6 @@
 #include <GL/glu.h>
 #include <reis/base.h>
 #include <reis/math.h>
-
 #include "log.h"
 
 #define MAX_TRIANGLES 20000 //2048 // Configurable

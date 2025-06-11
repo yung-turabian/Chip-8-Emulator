@@ -1,6 +1,7 @@
 #include "c8_functions.h"
 #include "c8_system.h"
 #include "c8_display.h"
+#include "c8.h"
 
 // TODO: replace log messages with NNN to actual value.
 char cmd[512] = {'\0'};
@@ -39,19 +40,19 @@ void cpuNULL( void ) {
 }
 
 void C8_Call_CallMachine( void ) {
-		fprintf( stderr, "[c8] Calling machine code is not implemented!\n" );
+		//fprintf( stderr, "[c8] Calling machine code is not implemented!\n" );
 }
 
 // 0x00E0: Clear screen
 void C8_Display_Clear( void ) {
-		strcpy( cmd, "Clearing screen" );
+		Log( LTRACE, "Clearing screen" );
 		C8_ClearDisplay();
 		PC += 2;
 }
 
 // 0x00EE: Return from subroutine
 void C8_Flow_Return( void ) {
-	strcpy( cmd, "Return from subroutine." );	
+	Log( LTRACE, "Return from subroutine." );	
 	if ( sp == 0 ) {
 			fprintf( stderr, "[c8] Stack underflow!\n" );
 			halt = true;
@@ -61,9 +62,29 @@ void C8_Flow_Return( void ) {
 	}
 }
 
+void C8_HiRes( void ) {
+		C8_ToggleHighresMode();
+}
+
+void C8_LoRes( void ) {
+		C8_ToggleHighresMode();
+}
+
+void C8_ScrollDown( void ) {
+
+}
+
+void C8_ScrollLeft( void ) {
+
+}
+
+void C8_ScrollRight( void ) {
+
+}
+
 // 0x1NNN: Jumps to address NNN.
 void C8_Flow_Jump( void ) {
-		//strcpy( cmd, "Jump to NNN." );
+		Log( LTRACE, "Jump to NNN." );
 		/*if ( (opcode & 0x0FFF) == PC ) {
 				fprintf(stderr, "[c8] Infinite loop detected at 0x%03X\n",
 								(opcode & 0x0FFF) );
@@ -75,7 +96,7 @@ void C8_Flow_Jump( void ) {
 
 // 0x2NNN: Call subroutine at NNN.
 void C8_Flow_Call( void ) {
-		//strcpy( cmd, "Call NNN." );	
+		Log( LTRACE, "Call NNN." );	
 		if ( sp >= STACK_SIZE ) {
 				fprintf( stderr, "Stack Overflow!\n" );
 				halt = true;
@@ -87,63 +108,63 @@ void C8_Flow_Call( void ) {
 
 // 0x3XNN: Skips the next instruction if VX == NN.
 void C8_Cond_IfVXEqualsNN( void ) {
-		//strcpy( cmd, "Skipping if VX == NN" );
+		Log( LTRACE, "Skipping if VX == NN" );
 		PC += ( V[(opcode & 0x0F00) >> 8] == (opcode & 0x00FF) ) ? 4 : 2;
 }
 
 // 0x4XNN: Skips the next instruction if VX != NN.
 void C8_Cond_IfVXNotEqualsNN( void ) {
-		//strcpy( cmd, "Skipping if VX != NN" );
+		Log( LTRACE, "Skipping if VX != NN" );
 		PC += ( V[(opcode & 0x0F00) >> 8] != (opcode & 0x00FF) ) ? 4 : 2;
 }
 
 // 0x5XY0: Skips the next instruction if VX == VY.
 void C8_Cond_IfVXEqualsVY( void ) {
-		//strcpy( cmd, "Skipping if VX == VY" );
+		Log( LTRACE, "Skipping if VX == VY" );
 		PC += ( V[(opcode & 0x0F00) >> 8] == V[(opcode & 0x00F0) >> 4] ) ? 4 : 2;
 }
 
 // 0x6XNN: Sets VX to NN.
 void C8_Const_SetVXToNN( void ) {
-		//strcpy( cmd, "Set VX to NN" );	
+		Log( LTRACE, "Set VX to NN" );	
 		V[(opcode & 0x0F00) >> 8] = opcode & 0x00FF;
 		PC += 2;
 }
 
 // 0x7XNN: Adds NN to VX.
 void C8_Const_AddNNToVX( void ) {
-		//strcpy( cmd, "Adds NN to VX." );	
+		Log( LTRACE, "Adds NN to VX." );	
 		V[(opcode & 0x0F00) >> 8] += opcode & 0x00FF;
 		PC += 2;
 }
 
 void C8_Assig_SetVXToVY( void ) {
-		//strcpy( cmd, "Set VX to VY (value)" );	
+		Log( LTRACE, "Set VX to VY (value)" );	
 		V[(opcode & 0x0F00) >> 8] = V[(opcode & 0x00F0) >> 4];
 		PC += 2;
 }
 
 void C8_Math_SetVXToVXOrVY( void ) {
-		//strcpy( cmd, "Set VX to VX or VY" );	
+		Log( LTRACE, "Set VX to VX or VY" );	
 		V[(opcode & 0x0F00) >> 8] |= V[(opcode & 0x00F0) >> 4];
 		PC += 2;
 }
 
 void C8_Math_SetVXToVXAndVY( void ) {
-		//strcpy( cmd, "Set VX to VX and VY" );	
+		Log( LTRACE, "Set VX to VX and VY" );	
 		V[(opcode & 0x0F00) >> 8] &= V[(opcode & 0x00F0) >> 4];
 		PC += 2;
 }
 
 void C8_Math_SetVXToVXXorVY( void ) {
-		//strcpy( cmd, "Set VX to VX xor VY" );	
+		Log( LTRACE, "Set VX to VX xor VY" );	
 		V[(opcode & 0x0F00) >> 8] ^= V[(opcode & 0x00F0) >> 4];
 		PC += 2;
 }
 
 // 0x8XY4: Adds VY to VX. VF is set to 1 if there's an overflow.
 void C8_Math_AddVYToVX( void ) {
-		//strcpy( cmd, "Add VY to VX" );	
+		Log( LTRACE, "Add VY to VX" );	
 		//   VY                       MAX 8BIT   VX
 		if ( V[(opcode & 0x00F0) >> 4] > (0xFF - V[(opcode & 0x0F00) >> 8]) ) {
 				V[0xF] = 1; // carry
@@ -157,7 +178,7 @@ void C8_Math_AddVYToVX( void ) {
 
 // 0x8XY5: Subtracts VY from VX. VF is set to 0 if there's an underflow.
 void C8_Math_SubVYFromVX( void ) {
-		//strcpy( cmd, "Subtract VY from VX" );	
+		Log( LTRACE, "Subtract VY from VX" );	
 		if ( V[(opcode & 0x0F00) >> 8] >= V[(opcode & 0x00F0) >> 4] ) {
 				V[0xF] = 1; // underflow
 		} else {
@@ -170,7 +191,7 @@ void C8_Math_SubVYFromVX( void ) {
 
 // 0x8XY6: Shifts VX to the right by 1, then stores the least significant bit of VX prior to shift into VF.
 void C8_Math_ShiftVXToRight( void ) {
-		//strcpy( cmd, "Shift VX to the right" );	
+		Log( LTRACE, "Shift VX to the right" );	
 		V[0xF] = V[(opcode & 0x0F00) >> 8] & 0x1;
 		V[(opcode & 0x0F00) >> 8] >>= 1;
 		PC += 2;
@@ -178,7 +199,7 @@ void C8_Math_ShiftVXToRight( void ) {
 
 // 0x8XY7: Sets VX to VY minus VX. VF is set to 0 when there's an underflow, and 1 when there is not.
 void C8_Math_SetVXToVYMinusVX( void ) {
-		//strcpy( cmd, "Set VX to VY - VX" );	
+		Log( LTRACE, "Set VX to VY - VX" );	
 		if ( V[(opcode & 0x00F0) >> 4] >= V[(opcode & 0x0F00) >> 8] ) {
 				V[0xF] = 1; // underflow
 		} else {
@@ -191,36 +212,36 @@ void C8_Math_SetVXToVYMinusVX( void ) {
 
 // 0x8XYE: Shifts VX to left by 1, then sets VF to 1 if the most significant bit of VX prior to that shift was set, or to 0 if it was unset. 
 void C8_Math_ShiftVXToLeft( void ) {
-		//strcpy( cmd, "Shift VX to left" );	
+		Log( LTRACE, "Shift VX to left" );	
 		V[0xF] = (V[(opcode & 0x0F00) >> 8] & 0x80) >> 7; // MSB
 		V[(opcode & 0x0F00) >> 8] <<= 1;
 		PC += 2;
 }
 
 void C8_Cond_SkipIfVXNotEqualsVY( void ) {
-		//strcpy( cmd, "Skipping if VX != VY" );
+		Log( LTRACE, "Skipping if VX != VY" );
 		PC += (V[(opcode & 0x0F00) >> 8] != V[(opcode & 0x00F0) >> 4]) ? 4 : 2;
 }
 
 void C8_Mem_SetIToNNN( void ) {
-		//strcpy( cmd, "Set I to NNN" );	
+		Log( LTRACE, "Set I to NNN" );	
 		I = opcode & 0x0FFF; // nibble
 		PC += 2;
 }
 
 void C8_Flow_JumpToNNNPlusV0( void ) {
-		//strcpy( cmd, "Jump to NNN + V0" );	
+		Log( LTRACE, "Jump to NNN + V0" );	
 		PC = V[0] + ( opcode & 0x0FFF );
 }
 
 void C8_Rand_SetVXToRandom( void ) {
-		//strcpy( cmd, "Setting VX to result of operation on random number" );
+		Log( LTRACE, "Setting VX to result of operation on random number" );
 		V[(opcode & 0x0F00) >> 8] = RandomU8( m_state ) & ( opcode & 0x00FF );
 		PC += 2;
 }
 
 void C8_Display_Draw( void ) {
-		//strcpy( cmd, "Drawing pixel." );	
+		Log( LTRACE, "Drawing pixel." );	
 		u16 x = V[(opcode & 0x0F00) >> 8];
 		u16 y = V[(opcode & 0x00F0) >> 4];
 		u16 height = opcode & 0x000F;
@@ -254,45 +275,53 @@ void C8_Display_Draw( void ) {
 								+-+-+-+-+                +-+-+-+-+                  */
 // EX9E: Skips the next instruction if the key stored in VX is pressed
 void C8_KeyOp_SkipIfPressed( void ) {
-		//strcpy( cmd, "Skipping next instruciton if key in VX is pressed" );	
-		PC += ( key[V[(opcode & 0x0F00) >> 8]] != 0 ) ? 4 : 2; 
+		Log( LTRACE, "Skipping next instruciton if key pressed" );	
+		PC += ( C8_key[V[(opcode & 0x0F00) >> 8]] != 0 ) ? 4 : 2;
 }
 
-// TODO
 void C8_KeyOp_SkipIfNotPressed( void ) {
-		//strcpy( cmd, "Key press is awaited." );
+		Log( LTRACE, "Skipping if not pressed" );
+		PC += ( C8_key[V[(opcode & 0x0F00) >> 8]] == 0 ) ? 4 : 2;
+}
+
+void C8_Timer_GetDelayTimer( void ) {
+		Log( LTRACE, "Fetching delay timer" );
+		V[(opcode & 0x0F00) >> 8] = delay_timer;
+		PC += 2;
+}
+
+void C8_KeyOp_GetKeyPress( void ) {
+		Log( LTRACE, "Awaiting key press" );
 		halt = true;
 }
 
-// TODO
 void C8_Timer_SetDelayTimer( void ) {
-		//strcpy( cmd, "Set delay timer to VX." );
+		Log( LTRACE, "Set delay timer to VX." );
 		delay_timer = V[(opcode & 0x0F00) >>8];
 		PC += 2;
-
 }
 
 void C8_Sound_SetSoundTimer( void ) {
-		//strcpy( cmd, "Set sound timer to VX." );
+		Log( LTRACE, "Set sound timer to VX." );
 		sound_timer = V[(opcode & 0x0F00) >>8];
 		PC += 2;
 }
 
 // FX1E: Adds VX to I. VF is not affected.
 void C8_Mem_AddVXToI( void ) {
-		//strcpy( cmd, "Adding VX to I." );
+		Log( LTRACE, "Adding VX to I." );
 		I += V[(opcode & 0x0F00) >> 8];
 		PC += 2;
 }
 
 void C8_Mem_SetLocOfSpriteVX( void ) {
-		//strcpy( cmd, "Set I to location of sprite for character in VX." );	
+		Log( LTRACE, "Set I to location of sprite for character in VX." );	
 		I = V[(opcode & 0x0F00) >> 8] * 5;
 		PC += 2;
 }
 
 void C8_BCD_StoreBCDOfVXInI( void ) {
-		//strcpy( cmd, "Storing binary-coded decimal of VX." );	
+		Log( LTRACE, "Storing binary-coded decimal of VX." );	
 		memory[I] = V[(opcode & 0x0F00) >> 8] / 100;
 		memory[I + 1] = ( V[(opcode & 0x0F00) >> 8] / 10 ) % 10;
 		memory[I + 2] = ( V[(opcode & 0x0F00) >> 8] % 100 ) % 10;
@@ -300,7 +329,7 @@ void C8_BCD_StoreBCDOfVXInI( void ) {
 }
 
 void C8_Mem_StoreV0ToVX( void ) {
-		//strcpy( cmd, "Storing from V0 to VX." );
+		Log( LTRACE, "Storing from V0 to VX." );
 		for ( u16 i = 0; i <= ((opcode & 0x0F00) >> 8); ++i ) {
 			memory[I + i] = V[i];
 		}
@@ -308,7 +337,7 @@ void C8_Mem_StoreV0ToVX( void ) {
 }
 
 void C8_Mem_FillFromV0ToVX( void ) {
-		//strcpy( cmd, "Filling from V0 to VX." );
+		Log( LTRACE, "Filling from V0 to VX." );
 		for ( u16 i = 0; i <= ((opcode & 0x0F00) >> 8); ++i ) {
 				V[i] = memory[I + i];
 		}
@@ -343,6 +372,13 @@ void C8_InitChip8Compliance( void ) {
 		C8System[0xE0] = C8_Display_Clear;
 		C8System[0xEE] = C8_Flow_Return;
 
+		// SuperChip
+		C8System[0xFF] = C8_HiRes;
+		C8System[0xFE] = C8_LoRes;
+		C8System[0xC0] = C8_ScrollDown;
+		C8System[0xFB] = C8_ScrollRight;
+		C8System[0xFC] = C8_ScrollLeft;
+
 		C8Math[0x0] = C8_Assig_SetVXToVY;
 		C8Math[0x1] = C8_Math_SetVXToVXOrVY;
 		C8Math[0x2] = C8_Math_SetVXToVXAndVY;
@@ -355,7 +391,9 @@ void C8_InitChip8Compliance( void ) {
 
 		C8Key[0x9E] = C8_KeyOp_SkipIfPressed;
 		C8Key[0xA1] = C8_KeyOp_SkipIfNotPressed;
-
+		
+		C8Mem[0x07] = C8_Timer_GetDelayTimer;
+		C8Mem[0x0A] = C8_KeyOp_GetKeyPress;
 		C8Mem[0x15] = C8_Timer_SetDelayTimer;
 		C8Mem[0x18] = C8_Sound_SetSoundTimer;
 		C8Mem[0x1E] = C8_Mem_AddVXToI;

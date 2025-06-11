@@ -35,8 +35,6 @@ extern u8 sound_timer; // Buzzer sounds whenever the sound timer reaches 0
 extern u16 stack[STACK_SIZE];
 extern u16 sp;
 
-extern u8 key[16];
-
 static u8 chip8_fontset[80] = {
   0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
   0x20, 0x60, 0x20, 0x20, 0x70, // 1

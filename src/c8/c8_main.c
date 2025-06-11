@@ -19,13 +19,18 @@ u8 sound_timer; // Buzzer sounds whenever the sound timer reaches 0
 u16 stack[STACK_SIZE];
 u16 sp;
 
-u8 key[16] = {0};
+u8 C8_key[16] = {0};
 
 bool halt = false;
 
 TwistState *m_state;
 
 u8 C8_gfx[SCREEN_WIDTH * SCREEN_HEIGHT] = { 0 };
+u8 SC8_gfx[(SCREEN_WIDTH * 2) * (SCREEN_HEIGHT * 2)] = { 0 };
+
+u8 C8_screen_scale = 16;
+u32 C8_screen_size;
+
 
 void C8_SetPixel( u16 x, u16 y ) {
 		u16 i = y * SCREEN_WIDTH + x;
@@ -40,7 +45,7 @@ u8 C8_GetPixel( u16 x, u16 y ) {
 void C8_DrawMenu( void ) { }
 
 u8 C8_Setup( void ) {
-		Log( LTRACE, "Booting c8..." );
+		fprintf( stdout, "[c8] Booting c8...\n" );
 		PC = 0x200;
 		opcode = 0, I = 0, sp = 0;
 
@@ -56,6 +61,8 @@ u8 C8_Setup( void ) {
 		for ( int i = 0; i < STACK_SIZE; i++ ) {
 				stack[i] = 0;
 		}
+
+		C8_screen_size = highres_mode ? (SCREEN_WIDTH * SCREEN_HEIGHT) * 4 : (SCREEN_WIDTH * SCREEN_HEIGHT);	
 
 		C8_ClearDisplay();
 
@@ -110,7 +117,6 @@ u8 C8_LoadGame( const char* path ) {
 }
 
 void C8_EmulateCycle( void ) {
-
 		// Update timers
 		if ( delay_timer > 0 ) {
 				--delay_timer;
@@ -129,4 +135,6 @@ void C8_EmulateCycle( void ) {
 						C8_Execute();
 				}
 		}
+
+		memset( C8_key, 0, 16 );
 }
