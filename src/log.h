@@ -7,6 +7,9 @@
 
 #include <fcntl.h>
 #include <stdbool.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2

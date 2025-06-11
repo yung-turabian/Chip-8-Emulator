@@ -1,5 +1,7 @@
 /* Copyright 2025 Punchline Software
-
+  
+   A general OpenGL/SDL framework for use in projects. Very bare bones and
+	 further extensions can and should be made.
 */
 
 #ifndef PUNCHLINE_FRAMEWORK_H

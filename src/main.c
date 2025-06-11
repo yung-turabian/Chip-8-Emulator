@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "framework.h"
-#include "chip8.h"
+#include "c8/c8.h"
 
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
@@ -158,9 +158,8 @@ void Update() {
 u16 c8_pixel_size = 1 * SCREEN_SCALE;
 
 void C8RenderDisplay( void ) {
-		
 		for ( u16 i = 0; i < SCREEN_SIZE; i++ ) {
-				if ( gfx[i] == 1 ) {
+				if ( C8_gfx[i] == 1 ) {
 						u16 x = (i % SCREEN_WIDTH) * c8_pixel_size;
 						u16 y = (i / SCREEN_WIDTH) * c8_pixel_size;
 						Doxie_RenderPushQuadT( &renderer,
@@ -206,7 +205,7 @@ void Render( void ) {
 		}*/
 		Doxie_RenderEndFrame( &renderer );
     nk_sdl_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_MEMORY, MAX_ELEMENT_MEMORY);
-		//SDL_GL_SwapWindow( win );
+		SDL_GL_SwapWindow( win );
 }
 
 void PrintInfo( u32 interval, void *param ) {
@@ -228,7 +227,7 @@ int main( int argc, char **argv ) {
 				fprintf( stderr, "[c8] Failed to initialize SDL!\n" );
 				return EXIT_FAILURE;
 		}
-		if ( C8Setup() != 0 ) {
+		if ( C8_Setup() != 0 ) {
 				fprintf( stderr, "[c8] Failed to initialize C8!\n" );
 				goto cleanup;
 		}
@@ -267,11 +266,11 @@ int main( int argc, char **argv ) {
 		//SDL_TimerID timer_id = SDL_AddTimer( 3 * 1000, PrintInfo, (void*)5 );
 
 		if ( rom_name != NULL ) {
-				C8LoadGame( rom_name );
+				C8_LoadGame( rom_name );
 				char new_title[512] = {'\0'};
 				const char *old_title = SDL_GetWindowTitle( win );
 				strncpy( new_title, old_title, strlen(old_title) );
-				strncat( new_title, " - ", 1 );
+				strncat( new_title, " - ", 4 );
 				strncat( new_title, rom_name, strlen(rom_name) );
 				SDL_SetWindowTitle( win, new_title );
 		}
@@ -362,9 +361,11 @@ int main( int argc, char **argv ) {
             }
         }
         nk_end(nk_ctx);*/
-
+			
+				// Roughly 60hz but not guarenteed
+				SDL_Delay( 16 );
+				C8_EmulateCycle();
 				Render();
-				SDL_GL_SwapWindow( win );
 		}
 
 		SDL_StopTextInput();

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "c8_functions.h": "c",
+        "c8.h": "c",
+        "c8_system.h": "c",
+        "c8_display.h": "c"
+    }
+}

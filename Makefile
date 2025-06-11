@@ -1,9 +1,9 @@
 CC=gcc
 LIBS=-lSDL2main -lSDL2 -lGL -lGLU -lGLEW -lreis -lm
-SRCS=src/main.c
+SRCS=src/main.c src/c8/c8_main.c src/c8/c8_functions.c
 OBJS=$(patsubst src/%.c,src/%.o,$(SRCS))
 DEPS=$(patsubst src/%.c,src/%.d,$(SRCS))
-BIN_NAME=chipper
+BIN_NAME=c8
 #WARNING= 
 #-Wall -Wextra
 CCFLAGS= -DDEBUG -ggdb -g -pg -O0
